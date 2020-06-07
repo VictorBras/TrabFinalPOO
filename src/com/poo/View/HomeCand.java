@@ -61,7 +61,7 @@ public class HomeCand extends JFrame {
 		});
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Perfil");
+		JButton btnNewButton_1 = new JButton("Dados");
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -18, SpringLayout.NORTH, btnNewButton_1);
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_1, 12, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_1, -337, SpringLayout.EAST, contentPane);
