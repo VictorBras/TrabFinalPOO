@@ -19,12 +19,15 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private JLabel lblNewLabel_2;
 
 	/**
 	 * Launch the application.
@@ -47,6 +50,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setTitle("Login");
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,6 +76,27 @@ public class Login extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("Entrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String senha = passwordField.getText();
+				String id = textField.getText();
+				
+				//Validação dos dados
+				
+				if(senha.equals("1234567"))
+				{
+					HomeCand homeCand = new HomeCand();
+					setVisible(false);
+				}
+				else
+				{
+					lblNewLabel_2.setText("Senha incorreta!!");
+				}
+				
+				
+			}
+		});
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBackground(SystemColor.inactiveCaption);
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 164, SpringLayout.WEST, contentPane);
@@ -87,9 +112,10 @@ public class Login extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -6, SpringLayout.NORTH, passwordField);
 		contentPane.add(passwordField);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_2, 174, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_2, -22, SpringLayout.SOUTH, contentPane);
+		lblNewLabel_2 = new JLabel("");
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_2, 160, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_2, -25, SpringLayout.SOUTH, contentPane);
 		contentPane.add(lblNewLabel_2);
+		
 	}
 }
