@@ -3,15 +3,15 @@ package com.poo.trabFinal.models;
 import java.util.List;
 
 public class Empresa {
-	private String id;
+	private int id;
 	private String nome;
 	private List<Vaga> vagas;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -31,7 +31,4 @@ public class Empresa {
 		this.vagas = vagas;
 	}
 
-	public void addVagas(Vaga vaga) {
-		this.addVagas(vaga);
-	}
 }

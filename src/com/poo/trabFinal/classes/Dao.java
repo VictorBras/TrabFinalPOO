@@ -11,6 +11,8 @@ import com.poo.trabFinal.jdbc.ConnectionFactory;
 public abstract class Dao<T> implements IDao<T> {
 
 	protected String table;
+	protected String getAllSQL;
+	protected String readSQL;
 	protected String insertSQL;
 	protected String updateSQL;
 
@@ -22,13 +24,12 @@ public abstract class Dao<T> implements IDao<T> {
 	public Retorno<T> getAll() throws SQLException {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
-		String sql = String.format("SELECT * FROM %s", this.table);
 		ResultSet rs = null;
 		Retorno<T> retorno = new Retorno<T>();
 
 		try {
-			stmt = con.prepareStatement(sql);
-			rs = stmt.executeQuery(sql);
+			stmt = con.prepareStatement(this.getAllSQL);
+			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				retorno.dataList.add(this.createObject(rs));
@@ -47,16 +48,15 @@ public abstract class Dao<T> implements IDao<T> {
 	}
 
 	@Override
-	public Retorno<T> read(String id) throws SQLException {
+	public Retorno<T> read(int id) throws SQLException {
 		Connection con = ConnectionFactory.getConnection();
-		String sql = String.format("DELETE FROM %s WHERE id = ?", this.table);
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Retorno<T> retorno = new Retorno<T>();
 
 		try {
-			stmt = con.prepareStatement(sql);
-			stmt.setString(1, id);
+			stmt = con.prepareStatement(this.readSQL);
+			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 
 			retorno.data = this.createObject(rs);
@@ -96,7 +96,7 @@ public abstract class Dao<T> implements IDao<T> {
 	}
 
 	@Override
-	public Retorno<T> update(String id, T data) throws SQLException {
+	public Retorno<T> update(int id, T data) throws SQLException {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		Retorno<T> retorno = new Retorno<T>();
@@ -119,7 +119,7 @@ public abstract class Dao<T> implements IDao<T> {
 	}
 
 	@Override
-	public Retorno<T> delete(String id) throws SQLException {
+	public Retorno<T> delete(int id) throws SQLException {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		String sql = String.format("DELETE FROM %s WHERE id = ?", this.table);
@@ -127,7 +127,7 @@ public abstract class Dao<T> implements IDao<T> {
 
 		try {
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, id);
+			stmt.setInt(1, id);
 			stmt.executeUpdate();
 
 			retorno.mensagem = "Dados deletados com sucesso";

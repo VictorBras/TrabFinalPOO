@@ -1,16 +1,16 @@
 package com.poo.trabFinal.models;
 
 public class Vaga {
-	private String id;
+	private int id;
 	private String cargo;
 	private String descricao;
-	private String IdEmpresa;
+	private int IdEmpresa;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -30,11 +30,12 @@ public class Vaga {
 		this.descricao = descricao;
 	}
 
-	public String getIdEmpresa() {
+	public int getIdEmpresa() {
 		return IdEmpresa;
 	}
 
-	public void setIdEmpresa(String idEmpresa) {
+	public void setIdEmpresa(int idEmpresa) {
 		IdEmpresa = idEmpresa;
 	}
+
 }

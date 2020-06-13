@@ -13,22 +13,24 @@ public class CandidatoDAO extends Dao<Candidato> {
 		super();
 		
 		this.table = "candidato";
+		this.readSQL = "select * from candidato where id = ?";
 		this.insertSQL = "insert into candidato(nome, idade, id) values (?, ?, ?)";
-		this.updateSQL = "update candidato set nome = ?, idade = ? where id = ?";	
+		this.updateSQL = "update candidato set nome = ?, idade = ? where id = ?";
+		this.getAllSQL = "select * from candidato";
 	}
 
 	@Override
 	protected void setStatementValues(PreparedStatement stmt, Candidato data) throws SQLException {
 		stmt.setString(1, data.getNome());
 		stmt.setInt(2, data.getIdade());
-		stmt.setString(3, data.getId());
+		stmt.setInt(3, data.getId());
 	}
 
 	@Override
 	protected Candidato createObject(ResultSet rs) throws SQLException {
 		Candidato candidato = new Candidato();
 		
-		candidato.setId(rs.getString("id"));
+		candidato.setId(rs.getInt("id"));
 		candidato.setNome(rs.getString("nome"));
 		candidato.setIdade(rs.getInt("idade"));
 		

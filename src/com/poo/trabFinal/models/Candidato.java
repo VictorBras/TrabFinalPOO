@@ -1,16 +1,16 @@
 package com.poo.trabFinal.models;
 
 public class Candidato {
-	private String Id;
+	private int id;
 	private String nome;
 	private int idade;
 
-	public String getId() {
-		return Id;
+	public int getId() {
+		return id;
 	}
 
-	public void setId(String id) {
-		Id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
