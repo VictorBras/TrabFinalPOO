@@ -53,13 +53,16 @@ public abstract class Dao<T> implements IDao<T> {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Retorno<T> retorno = new Retorno<T>();
-
+		
 		try {
 			stmt = con.prepareStatement(this.readSQL);
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-
-			retorno.data = this.createObject(rs);
+			
+			while (rs.next())
+			{
+				retorno.data = this.createObject(rs);
+			}
 			retorno.mensagem = "Dados retornados com sucesso";
 			retorno.success = true;
 		} catch (SQLException e) {

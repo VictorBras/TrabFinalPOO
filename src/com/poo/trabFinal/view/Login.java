@@ -1,26 +1,28 @@
-package com.poo.View;
+package com.poo.trabFinal.view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.SpringLayout;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.JPasswordField;
+import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.border.EmptyBorder;
+
+import com.poo.trabFinal.classes.Retorno;
+import com.poo.trabFinal.controller.CandidatoController;
+import com.poo.trabFinal.controller.EmpresaController;
+import com.poo.trabFinal.view.HomeCand;
+import com.poo.trabFinal.view.Login;
+import com.poo.trabFinal.classes.Retorno;
 
 public class Login extends JFrame {
 
@@ -64,7 +66,7 @@ public class Login extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Nome");
+		JLabel lblNewLabel = new JLabel("ID");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblNewLabel);
 		sl_contentPane.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblNewLabel);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel, -210, SpringLayout.SOUTH, contentPane);
@@ -80,18 +82,56 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String senha = passwordField.getText();
-				String id = textField.getText();
-				
-				//Validação dos dados
-				
-				if(senha.equals("1234567"))
+				String id_txt = textField.getText();
+				int id = Integer.parseInt(id_txt);
+				CandidatoController controller = new CandidatoController();
+				EmpresaController controller2 = new EmpresaController();
+				Retorno retorno = new Retorno();
+
+				try {
+					retorno = controller.find(id);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if(retorno.mensagem.equals("Dados retornados com sucesso"))
 				{
-					HomeCand homeCand = new HomeCand();
-					setVisible(false);
+					if(senha.equals("1234567"))
+					{
+						HomeCand homeCand = new HomeCand();
+						setVisible(false);
+					}
+					else
+					{
+						lblNewLabel_2.setText("Senha incorreta!!");
+					}
 				}
 				else
 				{
-					lblNewLabel_2.setText("Senha incorreta!!");
+					try {
+						retorno = controller2.find(id);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(retorno.mensagem.equals("Dados retornados com sucesso"))
+					{
+						if(senha.equals("1234567"))
+						{
+							HomeEmp homeEmp = new HomeEmp();
+							setVisible(false);
+						}
+						else
+						{
+							lblNewLabel_2.setText("Senha incorreta!!");
+						}
+					}
+					else
+					{
+						lblNewLabel_2.setText("ID inválido!!");
+					}
 				}
 				
 				

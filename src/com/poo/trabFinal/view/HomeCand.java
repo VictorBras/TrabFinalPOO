@@ -1,22 +1,21 @@
-package com.poo.View;
+package com.poo.trabFinal.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
-
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SpringLayout;
-import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
+import com.poo.trabFinal.view.Dados;
+import com.poo.trabFinal.view.Login;
 
 public class HomeCand extends JFrame {
 

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-
+	
 	private static final String DRIVE = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://database-1.coctcpxbdu3j.us-east-1.rds.amazonaws.com:3306/meu_banco_aula?useTimezone=true&serverTimezone=UTC";
 	private static final String USER = "admin";
@@ -44,4 +44,5 @@ public class ConnectionFactory {
 			}
 		}
 	}
+
 }

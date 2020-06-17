@@ -1,21 +1,21 @@
-package com.poo.View;
+package com.poo.trabFinal.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
-
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.SpringLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Color;
+import com.poo.trabFinal.view.HomeEmp;
+import com.poo.trabFinal.view.SuasVagasEmp;
 
 public class HomeEmp extends JFrame {
 

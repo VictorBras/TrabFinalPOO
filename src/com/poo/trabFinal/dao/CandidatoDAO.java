@@ -12,11 +12,11 @@ public class CandidatoDAO extends Dao<Candidato> {
 	public CandidatoDAO() {
 		super();
 		
-		this.table = "candidato";
-		this.readSQL = "select * from candidato where id = ?";
-		this.insertSQL = "insert into candidato(nome, idade, id) values (?, ?, ?)";
-		this.updateSQL = "update candidato set nome = ?, idade = ? where id = ?";
-		this.getAllSQL = "select * from candidato";
+		this.table = "Candidato";
+		this.readSQL = "select * from Candidato where id = ?";
+		this.insertSQL = "insert into Candidato(nome, idade, id) values (?, ?, ?)";
+		this.updateSQL = "update Candidato set nome = ?, idade = ? where id = ?";
+		this.getAllSQL = "select * from Candidato";
 	}
 
 	@Override
