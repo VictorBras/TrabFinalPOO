@@ -7,17 +7,17 @@ import com.poo.trabFinal.dao.CandidatoDAO;
 import com.poo.trabFinal.interfaces.IController;
 import com.poo.trabFinal.models.Candidato;
 
-public class CandidatoController<T> implements IController<T>{
+public class CandidatoController implements IController<Candidato>{
 
 	@Override
-	public Retorno<T> getAll() throws SQLException{
+	public Retorno<Candidato> getAll() throws SQLException{
 		
-		Retorno<T> retorno = new Retorno<T>();
+		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
 		
 		try {		
 			
-			retorno = (Retorno<T>) dao.getAll();
+			retorno = dao.getAll();
 		}
 		finally {
 			//System.out.println("Fim da leitura");
@@ -27,14 +27,14 @@ public class CandidatoController<T> implements IController<T>{
 	}
 
 	@Override
-	public Retorno<T> find(int id) throws SQLException {
+	public Retorno<Candidato> find(int id) throws SQLException {
 		
-		Retorno<T> retorno = new Retorno<T>();
+		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
 		
 		try {		
 			
-			retorno = (Retorno<T>) dao.read(id);
+			retorno = dao.read(id);
 		}
 		finally {
 			//System.out.println("Fim da leitura");
@@ -44,14 +44,14 @@ public class CandidatoController<T> implements IController<T>{
 	}
 
 	@Override
-	public Retorno<T> update(int id, T data) throws SQLException {
+	public Retorno<Candidato> update(int id, Candidato data) throws SQLException {
 		
-		Retorno<T> retorno = new Retorno<T>();
+		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
 		
 		try {		
 			
-			retorno = (Retorno<T>) dao.update(id, (Candidato) data);
+			retorno = dao.update(id, (Candidato) data);
 		}
 		finally {
 			//System.out.println("Fim da leitura");
@@ -61,14 +61,14 @@ public class CandidatoController<T> implements IController<T>{
 	}
 
 	@Override
-	public Retorno<T> delete(int id) throws SQLException {
+	public Retorno<Candidato> delete(int id) throws SQLException {
 		
-		Retorno<T> retorno = new Retorno<T>();
+		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
 		
 		try {		
 			
-			retorno = (Retorno<T>) dao.delete(id);
+			retorno = dao.delete(id);
 		}
 		finally {
 			//System.out.println("Fim da leitura");
@@ -78,14 +78,14 @@ public class CandidatoController<T> implements IController<T>{
 	}
 
 	@Override
-	public Retorno<T> insert(T data) throws SQLException {
+	public Retorno<Candidato> insert(Candidato data) throws SQLException {
 		
-		Retorno<T> retorno = new Retorno<T>();
+		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
 		
 		try {		
 			
-			retorno = (Retorno<T>) dao.create((Candidato) data);
+			retorno = dao.create((Candidato) data);
 		}
 		finally {
 			//System.out.println("Fim da leitura");
