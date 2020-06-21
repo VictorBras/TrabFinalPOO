@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
+import com.poo.trabFinal.classes.Retorno;
+import com.poo.trabFinal.controller.CandidatoController;
+import com.poo.trabFinal.models.Candidato;
 import com.poo.trabFinal.view.Dados;
 import com.poo.trabFinal.view.Login;
 
@@ -28,7 +32,7 @@ public class HomeCand extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HomeCand() {
+	public HomeCand(Candidato cand) {
 		setTitle("Home");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +43,7 @@ public class HomeCand extends JFrame {
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
 		
-		JLabel lblNewLabel = new JLabel("Gabriel Nunes");
+		JLabel lblNewLabel = new JLabel(cand.getNome());
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel, 12, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel, 12, SpringLayout.WEST, contentPane);
 		contentPane.add(lblNewLabel);
@@ -56,7 +60,7 @@ public class HomeCand extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Dados dadosr = new Dados();
+				Dados dados = new Dados(cand);
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -18, SpringLayout.NORTH, btnNewButton_1);
@@ -88,5 +92,41 @@ public class HomeCand extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_3, 0, SpringLayout.NORTH, lblNewLabel);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_3, -10, SpringLayout.EAST, contentPane);
 		contentPane.add(btnNewButton_3);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_1, 163, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -10, SpringLayout.SOUTH, contentPane);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton_4 = new JButton("Excluir Conta");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CandidatoController controller = new CandidatoController();
+				Retorno retorno = new Retorno();
+				
+				try {
+					retorno = controller.delete(cand.getId());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				if(retorno.success = true)
+				{
+					setVisible(false);
+					Login login = new Login();
+				}
+				else
+				{
+					lblNewLabel_1.setText(retorno.mensagem);
+				}
+			}
+		});
+		btnNewButton_4.setBackground(SystemColor.textInactiveText);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton_4, -26, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_4, 0, SpringLayout.EAST, btnNewButton_3);
+		contentPane.add(btnNewButton_4);
+		
 	}
 }

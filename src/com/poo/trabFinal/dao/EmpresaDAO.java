@@ -14,11 +14,11 @@ public class EmpresaDAO extends Dao<Empresa> {
 	public EmpresaDAO() {
 		super();
 		
-		this.table = "empresa";
-		this.getAllSQL = "select e.*, (select * from vaga where IdEmpresa = e.id) as vagas from empresa e";
-		this.readSQL = "select e.*, (select * from vaga where IdEmpresa = e.id) as vagas from empresa e where id = ?";
-		this.insertSQL = "insert into empresa(nome, id) values (? , ?)";
-		this.updateSQL = "update empresa set nome = ? where id = ?";
+		this.table = "Empresa";
+		this.getAllSQL = "select e.*, (select * from vaga where IdEmpresa = e.id) as vagas from Empresa e";
+		this.readSQL = "select * from Empresa where id = ?";
+		this.insertSQL = "insert into Empresa(nome, id) values (? , ?)";
+		this.updateSQL = "update Empresa set nome = ? where id = ?";
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class EmpresaDAO extends Dao<Empresa> {
 		
 		empresa.setId(rs.getInt("id"));
 		empresa.setNome(rs.getString("nome"));
-		empresa.setVagas((List<Vaga>) rs.getObject("vagas"));
+		//empresa.setVagas((List<Vaga>) rs.getObject("vagas"));
 		
 		return empresa;
 	}

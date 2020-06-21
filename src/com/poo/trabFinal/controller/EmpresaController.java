@@ -33,7 +33,6 @@ public class EmpresaController implements IController<Empresa> {
 		EmpresaDAO dao = new EmpresaDAO();
 		
 		try {		
-			
 			retorno = dao.read(id);
 		}
 		finally {
@@ -67,7 +66,6 @@ public class EmpresaController implements IController<Empresa> {
 		EmpresaDAO dao = new EmpresaDAO();
 		
 		try {		
-			
 			retorno = dao.update(id, (Empresa) data);
 		}
 		finally {

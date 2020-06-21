@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.poo.trabFinal.interfaces.IDao;
 import com.poo.trabFinal.jdbc.ConnectionFactory;
+import com.poo.trabFinal.models.Candidato;
 
 public abstract class Dao<T> implements IDao<T> {
 
@@ -63,8 +64,16 @@ public abstract class Dao<T> implements IDao<T> {
 			{
 				retorno.data = this.createObject(rs);
 			}
-			retorno.mensagem = "Dados retornados com sucesso";
-			retorno.success = true;
+			if(retorno.data == null)
+			{
+				retorno.mensagem = "Falha ao encontrar dados";
+				retorno.success = false;
+			}
+			else
+			{
+				retorno.mensagem = "Dados retornados com sucesso";
+				retorno.success = true;
+			}
 		} catch (SQLException e) {
 			retorno.mensagem = "Falha ao encontrar dados";
 			retorno.success = false;
@@ -108,7 +117,7 @@ public abstract class Dao<T> implements IDao<T> {
 			stmt = con.prepareStatement(this.updateSQL);
 			this.setStatementValues(stmt, data);
 			stmt.executeUpdate();
-
+			
 			retorno.mensagem = "Dados atualizados com sucesso";
 			retorno.success = true;
 		} catch (SQLException e) {

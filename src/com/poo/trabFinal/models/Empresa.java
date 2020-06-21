@@ -5,7 +5,7 @@ import java.util.List;
 public class Empresa {
 	private int id;
 	private String nome;
-	private List<Vaga> vagas;
+	//private List<Vaga> vagas;
 
 	public int getId() {
 		return id;
@@ -23,12 +23,12 @@ public class Empresa {
 		this.nome = nome;
 	}
 
-	public List<Vaga> getVagas() {
+	/*public List<Vaga> getVagas() {
 		return vagas;
 	}
 
 	public void setVagas(List<Vaga> vagas) {
 		this.vagas = vagas;
-	}
+	}*/
 
 }

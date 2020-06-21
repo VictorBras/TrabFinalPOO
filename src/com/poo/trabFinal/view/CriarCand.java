@@ -18,12 +18,14 @@ import com.poo.trabFinal.classes.Retorno;
 import com.poo.trabFinal.controller.CandidatoController;
 import com.poo.trabFinal.models.Candidato;
 import com.poo.trabFinal.view.Dados;
+import java.awt.SystemColor;
 
-public class Dados extends JFrame {
+public class CriarCand extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -32,17 +34,17 @@ public class Dados extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dados(Candidato cand) {
-		setTitle("Dados");
+	public CriarCand() {
+		setTitle("Registar");
 		setVisible(true);
-		setBounds(300, 100, 450, 300);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nome");
+		JLabel lblNewLabel_1 = new JLabel("ID");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_1, 10, SpringLayout.NORTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_1, 10, SpringLayout.WEST, contentPane);
 		contentPane.add(lblNewLabel_1);
@@ -53,7 +55,7 @@ public class Dados extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Idade");
+		JLabel lblNewLabel_2 = new JLabel("Nome");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_2, 6, SpringLayout.SOUTH, textField_1);
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_2, 0, SpringLayout.WEST, lblNewLabel_1);
 		contentPane.add(lblNewLabel_2);
@@ -69,7 +71,7 @@ public class Dados extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_3, -23, SpringLayout.SOUTH, contentPane);
 		contentPane.add(lblNewLabel_3);
 		
-		JButton btnNewButton = new JButton("Atualizar");
+		JButton btnNewButton = new JButton("Registrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -77,15 +79,18 @@ public class Dados extends JFrame {
 				Candidato candidato = new Candidato();
 				Retorno retorno = new Retorno();
 				
-				String idade_txt = textField_2.getText();
+				String idade_txt = textField.getText();
 				int idade = Integer.parseInt(idade_txt);
 				
-				candidato.setId(cand.getId());
+				String id_txt = textField_1.getText();
+				int id = Integer.parseInt(id_txt);
+				
+				candidato.setId(id);
 				candidato.setIdade(idade);
-				candidato.setNome(textField_1.getText());
+				candidato.setNome(textField_2.getText());
 				
 				try {
-					retorno = controller.update(cand.getId(), candidato);
+					retorno = controller.insert(candidato);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -97,6 +102,30 @@ public class Dados extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 166, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -57, SpringLayout.SOUTH, contentPane);
 		contentPane.add(btnNewButton);
+		
+		textField = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField, 122, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblNewLabel_1);
+		textField.setColumns(10);
+		contentPane.add(textField);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Idade");
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_2_1, -6, SpringLayout.NORTH, textField);
+		sl_contentPane.putConstraint(SpringLayout.EAST, lblNewLabel_2_1, 0, SpringLayout.EAST, lblNewLabel_2);
+		contentPane.add(lblNewLabel_2_1);
+		
+		JButton btnNewButton_1 = new JButton("Voltar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				setVisible(false);
+				Login login = new Login();
+			}
+		});
+		btnNewButton_1.setBackground(SystemColor.controlShadow);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1, 0, SpringLayout.NORTH, lblNewLabel_1);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_1, -10, SpringLayout.EAST, contentPane);
+		contentPane.add(btnNewButton_1);
 		
 	}
 }

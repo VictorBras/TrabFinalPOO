@@ -20,6 +20,8 @@ import javax.swing.border.EmptyBorder;
 import com.poo.trabFinal.classes.Retorno;
 import com.poo.trabFinal.controller.CandidatoController;
 import com.poo.trabFinal.controller.EmpresaController;
+import com.poo.trabFinal.models.Candidato;
+import com.poo.trabFinal.models.Empresa;
 import com.poo.trabFinal.view.HomeCand;
 import com.poo.trabFinal.view.Login;
 import com.poo.trabFinal.classes.Retorno;
@@ -30,6 +32,8 @@ public class Login extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel_2;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
 
 	/**
 	 * Launch the application.
@@ -87,6 +91,8 @@ public class Login extends JFrame {
 				CandidatoController controller = new CandidatoController();
 				EmpresaController controller2 = new EmpresaController();
 				Retorno retorno = new Retorno();
+				Candidato cand = new Candidato();
+				Empresa emp = new Empresa();
 
 				try {
 					retorno = controller.find(id);
@@ -99,7 +105,8 @@ public class Login extends JFrame {
 				{
 					if(senha.equals("1234567"))
 					{
-						HomeCand homeCand = new HomeCand();
+						cand = (Candidato)retorno.data;
+						HomeCand homeCand = new HomeCand(cand);
 						setVisible(false);
 					}
 					else
@@ -120,7 +127,8 @@ public class Login extends JFrame {
 					{
 						if(senha.equals("1234567"))
 						{
-							HomeEmp homeEmp = new HomeEmp();
+							emp = (Empresa)retorno.data;
+							HomeEmp homeEmp = new HomeEmp(emp);
 							setVisible(false);
 						}
 						else
@@ -156,6 +164,30 @@ public class Login extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_2, 160, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_2, -25, SpringLayout.SOUTH, contentPane);
 		contentPane.add(lblNewLabel_2);
+		
+		btnNewButton_1 = new JButton("Novo Candidato");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1, 10, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_1, -128, SpringLayout.EAST, contentPane);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				setVisible(false);
+				CriarCand criar = new CriarCand();
+			}
+		});
+		contentPane.add(btnNewButton_1);
+		
+		btnNewButton_2 = new JButton("Nova Empresa");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				setVisible(false);
+				CriarEmp criar = new CriarEmp();
+			}
+		});
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_2, 0, SpringLayout.NORTH, btnNewButton_1);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_2, 6, SpringLayout.EAST, btnNewButton_1);
+		contentPane.add(btnNewButton_2);
 		
 	}
 }
