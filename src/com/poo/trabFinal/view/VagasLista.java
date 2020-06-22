@@ -21,7 +21,7 @@ import com.poo.trabFinal.models.Empresa;
 import com.poo.trabFinal.models.Vaga;
 import com.poo.trabFinal.view.SuasVagasEmp;
 
-public class SuasVagasEmp extends JFrame {
+public class VagasLista extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -36,7 +36,7 @@ public class SuasVagasEmp extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public SuasVagasEmp(Empresa emp) {
+	public VagasLista() {
 		setTitle("Vagas");
 		setVisible(true);
 		setBounds(300, 100, 500, 300);
@@ -50,7 +50,7 @@ public class SuasVagasEmp extends JFrame {
 		Retorno<Vaga> retorno = new Retorno<Vaga>();
 		
 		try {
-			retorno = controller.getAllEmp(emp.getId());
+			retorno = controller.getAll();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,48 +88,13 @@ public class SuasVagasEmp extends JFrame {
 			sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_2, 191, SpringLayout.WEST, contentPane);
 			contentPane.add(lblNewLabel_2);
 			
-			JButton btnNewButton_1 = new JButton("Excluir");
-			btnNewButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					
-					VagaController controller = new VagaController();
-					Retorno retorno = new Retorno();
-					
-					try {
-						retorno = controller.delete(vaga.getId());
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					if(retorno.success = true)
-					{
-						setVisible(false);
-						SuasVagasEmp vagas = new SuasVagasEmp(emp);
-					}
-					else
-					{
-						lblNewLabel_2.setText(retorno.mensagem);
-					}
-				}
-			});
-			sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1, -1, SpringLayout.NORTH, textField);
-			contentPane.add(btnNewButton_1);
+			north = north + 20;
+			JButton btnNewButton = new JButton("Candidatar-se");
+			sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton, north, SpringLayout.NORTH, contentPane);
+			sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 270, SpringLayout.WEST, contentPane);
+			contentPane.add(btnNewButton);
 			
-			JButton btnNewButton_1_1 = new JButton("Atualizar");
-			btnNewButton_1_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					
-					setVisible(false);
-					AtualizarVaga atualizar = new AtualizarVaga(vaga,emp);
-				}
-			});
-			sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_1, 18, SpringLayout.EAST, btnNewButton_1_1);
-			sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1_1, -1, SpringLayout.NORTH, textField);
-			sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_1_1, 18, SpringLayout.EAST, textField_1);
-			contentPane.add(btnNewButton_1_1);
-			
-			north = north + 40;
+			north = north + 20;
 		}
 		
 	}

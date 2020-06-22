@@ -31,6 +31,7 @@ public class CandidatoController implements IController<Candidato>{
 		
 		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
+		//id = Integer.parseInt(500 + "" + id  );
 		
 		try {		
 			
@@ -82,6 +83,7 @@ public class CandidatoController implements IController<Candidato>{
 		
 		Retorno<Candidato> retorno = new Retorno<Candidato>();
 		CandidatoDAO dao = new CandidatoDAO();
+		//data.setId(Integer.parseInt(500 + "" + data.getId()));
 		
 		try {		
 			

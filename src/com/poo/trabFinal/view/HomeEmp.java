@@ -55,7 +55,7 @@ public class HomeEmp extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				SuasVagasEmp atualizar = new SuasVagasEmp();
+				SuasVagasEmp vagas = new SuasVagasEmp(emp);
 			}
 		});
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton, 35, SpringLayout.SOUTH, lblNewLabel);
@@ -64,6 +64,12 @@ public class HomeEmp extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Criar Vagas");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CriarVagas criar = new CriarVagas(emp);
+			}
+		});
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_1, 0, SpringLayout.WEST, btnNewButton);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_1, 0, SpringLayout.EAST, btnNewButton);
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -138,6 +144,16 @@ public class HomeEmp extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_2, -10, SpringLayout.EAST, contentPane);
 		contentPane.add(btnNewButton_2);
 		
+		JButton btnNewButton_5 = new JButton("Lista de Candidatos");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CandLista candidatos = new CandLista();
+			}
+		});
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_5, 0, SpringLayout.NORTH, btnNewButton);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton_5, 60, SpringLayout.EAST, btnNewButton);
+		contentPane.add(btnNewButton_5);
+		
 	}
-
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.poo.trabFinal.interfaces.IDao;
 import com.poo.trabFinal.jdbc.ConnectionFactory;
@@ -16,6 +18,7 @@ public abstract class Dao<T> implements IDao<T> {
 	protected String readSQL;
 	protected String insertSQL;
 	protected String updateSQL;
+	protected String getAllEmpSQL;
 
 	protected abstract void setStatementValues(PreparedStatement stmt, T data) throws SQLException;
 
@@ -31,7 +34,36 @@ public abstract class Dao<T> implements IDao<T> {
 		try {
 			stmt = con.prepareStatement(this.getAllSQL);
 			rs = stmt.executeQuery();
+			
+			retorno.dataList = new ArrayList<T>();
+			while (rs.next()) {
+				retorno.dataList.add(this.createObject(rs));
+			}
 
+			retorno.mensagem = "Dados retornados com sucesso";
+			retorno.success = true;
+		} catch (SQLException e) {
+			retorno.mensagem = "Falha ao retornar dados";
+			retorno.success = false;
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+
+		return retorno;
+	}
+	
+	public Retorno<T> getAllEmp(int idEmpresa) throws SQLException {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Retorno<T> retorno = new Retorno<T>();
+
+		try {
+			stmt = con.prepareStatement(this.getAllEmpSQL);
+			stmt.setInt(1, idEmpresa);
+			rs = stmt.executeQuery();
+
+			retorno.dataList = new ArrayList<T>();
 			while (rs.next()) {
 				retorno.dataList.add(this.createObject(rs));
 			}

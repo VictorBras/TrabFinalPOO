@@ -31,6 +31,7 @@ public class EmpresaController implements IController<Empresa> {
 		
 		Retorno<Empresa> retorno = new Retorno<Empresa>();
 		EmpresaDAO dao = new EmpresaDAO();
+		//id = Integer.parseInt(100 + "" + id  );
 		
 		try {		
 			retorno = dao.read(id);
@@ -47,6 +48,7 @@ public class EmpresaController implements IController<Empresa> {
 		
 		Retorno<Empresa> retorno = new Retorno<Empresa>();
 		EmpresaDAO dao = new EmpresaDAO();
+		//data.setId(Integer.parseInt(100 + "" + data.getId()));
 		
 		try {		
 			

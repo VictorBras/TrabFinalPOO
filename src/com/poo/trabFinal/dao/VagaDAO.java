@@ -12,19 +12,25 @@ public class VagaDAO extends Dao<Vaga> {
 	public VagaDAO() {
 		super();
 		
-		this.table = "vaga";
-		this.getAllSQL = "select * from vaga";
-		this.readSQL = "select * from vaga where id = ?";
-		this.insertSQL = "insert into vaga(cargo, descricao, idEmpresa) values (?, ?, ?)";
-		this.updateSQL = "update vaga set cargo = ?, descricao = ?, idEmpresa = ? where id = ?";
+		this.table = "Vaga";
+		this.getAllSQL = "select * from Vaga";
+		this.getAllEmpSQL = "select * from Vaga where idEmpresa = ?";
+		this.readSQL = "select * from Vaga where id = ?";
+		this.insertSQL = "insert into Vaga(cargo, descricao, idEmpresa) values (?, ?, ?)";
+		this.updateSQL = "update Vaga set cargo = ?, descricao = ? where id = ?";
 	}
 	
 	@Override
 	protected void setStatementValues(PreparedStatement stmt, Vaga data) throws SQLException {
 		stmt.setString(1, data.getCargo());
 		stmt.setString(2, data.getDescricao());
+		
+		if(stmt.toString().equals("com.mysql.cj.jdbc.ClientPreparedStatement: update Vaga set cargo = '" + data.getCargo() + "', descricao = '" + data.getDescricao() + "' where id = ** NOT SPECIFIED **"))
+		{
+			stmt.setInt(3, data.getId());
+		}
+		else
 		stmt.setInt(3, data.getIdEmpresa());
-		stmt.setInt(4, data.getId());
 	}
 
 	@Override

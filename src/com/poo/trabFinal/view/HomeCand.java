@@ -52,6 +52,8 @@ public class HomeCand extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 0, SpringLayout.WEST, lblNewLabel);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				VagasLista vagas = new VagasLista();
 			}
 		});
 		contentPane.add(btnNewButton);
@@ -127,6 +129,17 @@ public class HomeCand extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton_4, -26, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_4, 0, SpringLayout.EAST, btnNewButton_3);
 		contentPane.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Lista de Empresas");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				EmpLista empresas = new EmpLista();
+			}
+		});
+		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_5, 0, SpringLayout.NORTH, btnNewButton_2);
+		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_5, -37, SpringLayout.EAST, contentPane);
+		contentPane.add(btnNewButton_5);
 		
 	}
 }

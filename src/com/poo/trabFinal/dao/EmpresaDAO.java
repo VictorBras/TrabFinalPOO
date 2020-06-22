@@ -15,7 +15,7 @@ public class EmpresaDAO extends Dao<Empresa> {
 		super();
 		
 		this.table = "Empresa";
-		this.getAllSQL = "select e.*, (select * from vaga where IdEmpresa = e.id) as vagas from Empresa e";
+		this.getAllSQL = "select * from Empresa";
 		this.readSQL = "select * from Empresa where id = ?";
 		this.insertSQL = "insert into Empresa(nome, id) values (? , ?)";
 		this.updateSQL = "update Empresa set nome = ? where id = ?";
