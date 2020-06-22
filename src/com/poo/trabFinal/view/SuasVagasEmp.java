@@ -46,6 +46,11 @@ public class SuasVagasEmp extends JFrame {
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
 		
+		JLabel lblNewLabel_4 = new JLabel("");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_4, 10, SpringLayout.NORTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_4, 111, SpringLayout.WEST, contentPane);
+		contentPane.add(lblNewLabel_4);
+		
 		VagaController controller = new VagaController();
 		Retorno<Vaga> retorno = new Retorno<Vaga>();
 		
@@ -57,6 +62,11 @@ public class SuasVagasEmp extends JFrame {
 		}
 		
 		int north = 6;
+		if(retorno.dataList == null)
+		{
+			lblNewLabel_4.setText("Não há nenhuma vaga cadastrada");
+		}
+		else
 		for(Vaga vaga:retorno.dataList)
 		{
 			JLabel lblNewLabel = new JLabel("Cargo");

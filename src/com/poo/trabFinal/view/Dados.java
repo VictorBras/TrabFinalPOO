@@ -24,6 +24,7 @@ public class Dados extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -52,6 +53,7 @@ public class Dados extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, textField_1, 10, SpringLayout.WEST, contentPane);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.setText(cand.getNome());
 		
 		JLabel lblNewLabel_2 = new JLabel("Idade");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_2, 6, SpringLayout.SOUTH, textField_1);
@@ -63,6 +65,7 @@ public class Dados extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, textField_2, 0, SpringLayout.EAST, textField_1);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
+		textField_2.setText(Integer.toString(cand.getIdade()));
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_3, 122, SpringLayout.WEST, contentPane);
@@ -83,6 +86,7 @@ public class Dados extends JFrame {
 				candidato.setId(cand.getId());
 				candidato.setIdade(idade);
 				candidato.setNome(textField_1.getText());
+				candidato.setEmail(textField.getText());
 				
 				try {
 					retorno = controller.update(cand.getId(), candidato);
@@ -97,6 +101,18 @@ public class Dados extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 166, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -57, SpringLayout.SOUTH, contentPane);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Email");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel, 6, SpringLayout.SOUTH, textField_2);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, lblNewLabel_1);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblNewLabel);
+		sl_contentPane.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblNewLabel_1);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		textField.setText(cand.getEmail());
 		
 	}
 }

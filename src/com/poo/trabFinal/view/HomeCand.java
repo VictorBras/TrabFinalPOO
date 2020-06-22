@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.poo.trabFinal.classes.Retorno;
 import com.poo.trabFinal.controller.CandidatoController;
+import com.poo.trabFinal.controller.CandidatoVagaController;
 import com.poo.trabFinal.models.Candidato;
 import com.poo.trabFinal.view.Dados;
 import com.poo.trabFinal.view.Login;
@@ -53,7 +54,7 @@ public class HomeCand extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				VagasLista vagas = new VagasLista();
+				VagasLista vagas = new VagasLista(cand);
 			}
 		});
 		contentPane.add(btnNewButton);
@@ -75,6 +76,12 @@ public class HomeCand extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Vagas Candidatadas");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				VagasCand vagas = new VagasCand(cand);
+			}
+		});
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton, 2, SpringLayout.EAST, btnNewButton_2);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1, 60, SpringLayout.SOUTH, btnNewButton_2);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_2, 38, SpringLayout.SOUTH, lblNewLabel);
@@ -105,19 +112,34 @@ public class HomeCand extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				CandidatoController controller = new CandidatoController();
+				CandidatoVagaController controller2 = new CandidatoVagaController();
 				Retorno retorno = new Retorno();
 				
 				try {
-					retorno = controller.delete(cand.getId());
-				} catch (SQLException e) {
+					retorno = controller2.deleteAll(cand.getId());
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 				
-				if(retorno.success = true)
+				if(retorno.success == true)
 				{
-					setVisible(false);
-					Login login = new Login();
+					try {
+						retorno = controller.delete(cand.getId());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(retorno.success = true)
+					{
+						setVisible(false);
+						Login login = new Login();
+					}
+					else
+					{
+						lblNewLabel_1.setText(retorno.mensagem);
+					}
 				}
 				else
 				{

@@ -10,6 +10,7 @@ import java.util.List;
 import com.poo.trabFinal.interfaces.IDao;
 import com.poo.trabFinal.jdbc.ConnectionFactory;
 import com.poo.trabFinal.models.Candidato;
+import com.poo.trabFinal.models.CandidatoVaga;
 
 public abstract class Dao<T> implements IDao<T> {
 
@@ -19,6 +20,7 @@ public abstract class Dao<T> implements IDao<T> {
 	protected String insertSQL;
 	protected String updateSQL;
 	protected String getAllEmpSQL;
+	protected String deleteAllSQL;
 
 	protected abstract void setStatementValues(PreparedStatement stmt, T data) throws SQLException;
 
@@ -35,10 +37,14 @@ public abstract class Dao<T> implements IDao<T> {
 			stmt = con.prepareStatement(this.getAllSQL);
 			rs = stmt.executeQuery();
 			
-			retorno.dataList = new ArrayList<T>();
-			while (rs.next()) {
-				retorno.dataList.add(this.createObject(rs));
-			}
+			if(rs.next()){
+				retorno.dataList = new ArrayList<T>();
+				   do{
+					   retorno.dataList.add(this.createObject(rs));
+				   }while(rs.next());
+				}else{
+				   //Se nao passar significa que não houve resultados
+				}
 
 			retorno.mensagem = "Dados retornados com sucesso";
 			retorno.success = true;
@@ -62,11 +68,15 @@ public abstract class Dao<T> implements IDao<T> {
 			stmt = con.prepareStatement(this.getAllEmpSQL);
 			stmt.setInt(1, idEmpresa);
 			rs = stmt.executeQuery();
-
-			retorno.dataList = new ArrayList<T>();
-			while (rs.next()) {
-				retorno.dataList.add(this.createObject(rs));
-			}
+			
+			if(rs.next()){
+				retorno.dataList = new ArrayList<T>();
+				   do{
+					   retorno.dataList.add(this.createObject(rs));
+				   }while(rs.next());
+				}else{
+				   //Se nao passar significa que não houve resultados
+				}
 
 			retorno.mensagem = "Dados retornados com sucesso";
 			retorno.success = true;
@@ -171,6 +181,30 @@ public abstract class Dao<T> implements IDao<T> {
 
 		try {
 			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+
+			retorno.mensagem = "Dados deletados com sucesso";
+			retorno.success = true;
+		} catch (SQLException e) {
+			retorno.mensagem = "Falha ao deletar dados";
+			retorno.success = false;
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+
+		return retorno;
+	}
+	
+	@Override
+	public Retorno<T> deleteAll(int id) throws SQLException {
+		
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		Retorno<T> retorno = new Retorno<T>();
+
+		try {
+			stmt = con.prepareStatement(this.deleteAllSQL);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 

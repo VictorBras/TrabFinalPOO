@@ -14,4 +14,6 @@ public interface IDao<T> {
 	public Retorno<T> update(int id, T data) throws SQLException;;
 
 	public Retorno<T> delete(int id) throws SQLException;;
+	
+	public Retorno<T> deleteAll(int id) throws SQLException;;
 }

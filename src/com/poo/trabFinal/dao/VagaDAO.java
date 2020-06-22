@@ -18,6 +18,7 @@ public class VagaDAO extends Dao<Vaga> {
 		this.readSQL = "select * from Vaga where id = ?";
 		this.insertSQL = "insert into Vaga(cargo, descricao, idEmpresa) values (?, ?, ?)";
 		this.updateSQL = "update Vaga set cargo = ?, descricao = ? where id = ?";
+		this.deleteAllSQL = "delete from Vaga where idEmpresa = ?";
 	}
 	
 	@Override

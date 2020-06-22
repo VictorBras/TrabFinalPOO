@@ -26,6 +26,7 @@ public class CriarCand extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -68,10 +69,12 @@ public class CriarCand extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_3, 122, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_3, -23, SpringLayout.SOUTH, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_3, -10, SpringLayout.SOUTH, contentPane);
 		contentPane.add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Registrar");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 169, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -38, SpringLayout.SOUTH, contentPane);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -88,6 +91,7 @@ public class CriarCand extends JFrame {
 				candidato.setId(id);
 				candidato.setIdade(idade);
 				candidato.setNome(textField_2.getText());
+				candidato.setEmail(textField_3.getText());
 				
 				try {
 					retorno = controller.insert(candidato);
@@ -99,8 +103,6 @@ public class CriarCand extends JFrame {
 				lblNewLabel_3.setText(retorno.mensagem);
 			}
 		});
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 166, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -57, SpringLayout.SOUTH, contentPane);
 		contentPane.add(btnNewButton);
 		
 		textField = new JTextField();
@@ -126,6 +128,17 @@ public class CriarCand extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnNewButton_1, 0, SpringLayout.NORTH, lblNewLabel_1);
 		sl_contentPane.putConstraint(SpringLayout.EAST, btnNewButton_1, -10, SpringLayout.EAST, contentPane);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel = new JLabel("Email");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel, 6, SpringLayout.SOUTH, textField);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, lblNewLabel_1);
+		contentPane.add(lblNewLabel);
+		
+		textField_3 = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_3, 6, SpringLayout.SOUTH, lblNewLabel);
+		sl_contentPane.putConstraint(SpringLayout.EAST, textField_3, 0, SpringLayout.EAST, textField_1);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
 		
 	}
 }

@@ -4,6 +4,7 @@ public class Candidato {
 	private int id;
 	private String nome;
 	private int idade;
+	private String email;
 
 	public int getId() {
 		return id;
@@ -27,6 +28,14 @@ public class Candidato {
 
 	public void setIdade(int idade) {
 		this.idade = idade;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

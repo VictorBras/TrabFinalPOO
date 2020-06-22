@@ -17,14 +17,16 @@ public class EmpresaDAO extends Dao<Empresa> {
 		this.table = "Empresa";
 		this.getAllSQL = "select * from Empresa";
 		this.readSQL = "select * from Empresa where id = ?";
-		this.insertSQL = "insert into Empresa(nome, id) values (? , ?)";
-		this.updateSQL = "update Empresa set nome = ? where id = ?";
+		this.insertSQL = "insert into Empresa(nome,endereco,email, id) values (? , ?, ?, ?)";
+		this.updateSQL = "update Empresa set nome = ?, endereco = ?, email = ? where id = ?";
 	}
 
 	@Override
 	protected void setStatementValues(PreparedStatement stmt, Empresa data) throws SQLException {
 		stmt.setString(1, data.getNome());
-		stmt.setInt(2, data.getId());
+		stmt.setString(2, data.getEndereco());
+		stmt.setString(3, data.getEmail());
+		stmt.setInt(4, data.getId());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,6 +36,8 @@ public class EmpresaDAO extends Dao<Empresa> {
 		
 		empresa.setId(rs.getInt("id"));
 		empresa.setNome(rs.getString("nome"));
+		empresa.setEndereco(rs.getString("endereco"));
+		empresa.setEmail(rs.getString("email"));
 		//empresa.setVagas((List<Vaga>) rs.getObject("vagas"));
 		
 		return empresa;

@@ -45,8 +45,18 @@ public class VagaController implements IController<Vaga>{
 
 	@Override
 	public Retorno find(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Retorno<Vaga> retorno = new Retorno<Vaga>();
+		VagaDAO dao = new VagaDAO();
+		
+		try {		
+			retorno = dao.read(id);
+		}
+		finally {
+			//System.out.println("Fim da leitura");
+		}
+		
+		return retorno;
 	}
 
 	@Override
@@ -89,6 +99,21 @@ public class VagaController implements IController<Vaga>{
 		
 		try {		
 			retorno = dao.delete(id);
+		}
+		finally {
+			//System.out.println("Fim da leitura");
+		}
+		
+		return retorno;
+	}
+	
+	public Retorno deleteAll(int idEmpresa) throws SQLException {
+		
+		Retorno<Vaga> retorno = new Retorno<Vaga>();
+		VagaDAO dao = new VagaDAO();
+		
+		try {		
+			retorno = dao.deleteAll(idEmpresa);
 		}
 		finally {
 			//System.out.println("Fim da leitura");

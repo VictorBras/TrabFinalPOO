@@ -26,6 +26,8 @@ public class DadosEmp extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
+	private JTextField textField;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -52,10 +54,11 @@ public class DadosEmp extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		textField_1 = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_1, 6, SpringLayout.SOUTH, lblNewLabel_1);
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_1, 1, SpringLayout.SOUTH, lblNewLabel_1);
 		sl_contentPane.putConstraint(SpringLayout.WEST, textField_1, 0, SpringLayout.WEST, lblNewLabel_1);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.setText(emp.getNome());
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblNewLabel_2, -23, SpringLayout.SOUTH, contentPane);
@@ -63,6 +66,8 @@ public class DadosEmp extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Atualizar");
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 170, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -50, SpringLayout.SOUTH, contentPane);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -73,6 +78,8 @@ public class DadosEmp extends JFrame {
 				
 				empresa.setId(emp.getId());
 				empresa.setNome(textField_1.getText());
+				empresa.setEndereco(textField.getText());
+				empresa.setEmail(textField_2.getText());
 				
 				try {
 					retorno = controller.update(emp.getId(), empresa);
@@ -84,9 +91,33 @@ public class DadosEmp extends JFrame {
 				lblNewLabel_2.setText(retorno.mensagem);
 			}
 		});
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnNewButton, 167, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnNewButton, -75, SpringLayout.SOUTH, contentPane);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Endere\u00E7o");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 6, SpringLayout.SOUTH, textField_1);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 0, SpringLayout.WEST, lblNewLabel_1);
+		contentPane.add(lblNewLabel_1_1);
+		
+		textField = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblNewLabel_1_1);
+		sl_contentPane.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblNewLabel_1);
+		textField.setText((String) null);
+		textField.setColumns(10);
+		contentPane.add(textField);
+		textField.setText(emp.getEndereco());
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Email");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1_1, 6, SpringLayout.SOUTH, textField);
+		sl_contentPane.putConstraint(SpringLayout.WEST, lblNewLabel_1_1_1, 0, SpringLayout.WEST, lblNewLabel_1);
+		contentPane.add(lblNewLabel_1_1_1);
+		
+		textField_2 = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_2, 6, SpringLayout.SOUTH, lblNewLabel_1_1_1);
+		sl_contentPane.putConstraint(SpringLayout.EAST, textField_2, 0, SpringLayout.EAST, textField_1);
+		textField_2.setText((String) null);
+		textField_2.setColumns(10);
+		contentPane.add(textField_2);
+		textField_2.setText(emp.getEmail());
 		
 		
 		

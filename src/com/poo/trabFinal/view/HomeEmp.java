@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import com.poo.trabFinal.classes.Retorno;
 import com.poo.trabFinal.controller.CandidatoController;
 import com.poo.trabFinal.controller.EmpresaController;
+import com.poo.trabFinal.controller.VagaController;
 import com.poo.trabFinal.models.Empresa;
 import com.poo.trabFinal.view.HomeEmp;
 import com.poo.trabFinal.view.SuasVagasEmp;
@@ -119,19 +120,34 @@ public class HomeEmp extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				EmpresaController controller = new EmpresaController();
+				VagaController controller2 = new VagaController();
 				Retorno retorno = new Retorno();
 				
 				try {
-					retorno = controller.delete(emp.getId());
-				} catch (SQLException e) {
+					retorno = controller2.deleteAll(emp.getId());
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 				
-				if(retorno.success = true)
+				if(retorno.success == true)
 				{
-					setVisible(false);
-					Login login = new Login();
+					try {
+						retorno = controller.delete(emp.getId());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(retorno.success = true)
+					{
+						setVisible(false);
+						Login login = new Login();
+					}
+					else
+					{
+						lblNewLabel_1.setText(retorno.mensagem);
+					}
 				}
 				else
 				{
